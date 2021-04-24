@@ -16,7 +16,7 @@ public class Turtle : MonoBehaviour
     void Update()
     {
         OutOfBounds();
-        transform.Translate(new Vector3(speed * direction * Time.deltaTime, upDown, 0));
+        transform.Translate(new Vector2(speed * direction * Time.deltaTime, upDown));
         upDown += Random.Range(-1f, 1f) / 1000; 
     }
 
