@@ -19,7 +19,7 @@ public class SpawnScript : MonoBehaviour
 
         if (fuckery == 0)
         {
-            GameObject cunt = Resources.Load("Prefabs/Enemy") as GameObject;
+            GameObject cunt = Resources.Load("Prefabs/Octopus") as GameObject;
             
         }
     }
