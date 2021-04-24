@@ -16,10 +16,7 @@ public class Octopus : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (transform.position.x < -10 || transform.position.x > 10)
-        {
-            Destroy(gameObject);
-        }
+        OutOfBounds();
         if (goingUp)
         {
             Debug.Log("Going up from " + transform.position.y + " to " + startY);
@@ -42,6 +39,14 @@ public class Octopus : MonoBehaviour
             {
                 goingUp = true;
             }
+        }
+    }
+
+    void OutOfBounds()
+    {
+        if (transform.position.x < -10 || transform.position.x > 10)
+        {
+            Destroy(gameObject);
         }
     }
 }
