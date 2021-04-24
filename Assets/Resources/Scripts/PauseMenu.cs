@@ -3,7 +3,7 @@ using UnityEngine.WSA;
 
 public class PauseMenu : MonoBehaviour
 {
-    public GameObject pauseMenu;
+    private GameObject pauseMenu;
 
     private void Awake()
     {
