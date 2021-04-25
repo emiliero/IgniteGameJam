@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -7,22 +8,32 @@ public class TinyFish : MonoBehaviour
 {
     GameObject target;
     float speed, timer;
-
+    bool goingRight;
 
     void Start()
     {
         target = GameObject.Find("Player");
         speed = 3;
-        timer = Random.Range(7, 12);
+        timer = UnityEngine.Random.Range(7, 12);
+        if (transform.position.x < 0) goingRight = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!goingRight && transform.localScale.x < 0)
+        {
+            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        }
+        else if(goingRight && transform.localScale.x > 0)
+        {
+            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        }
         OutOfBounds();
         timer -= Time.deltaTime;
         if (timer > 0)
         {
+            goingRight = FindDirection(transform, target.transform);
             transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
             if (transform.position.x < target.transform.position.x)
             {
@@ -35,15 +46,23 @@ public class TinyFish : MonoBehaviour
         }
         else
         {
+
             if (transform.position.x < 0)
             {
+                goingRight = false;
                 transform.Translate(Vector2.left * speed * 2 * Time.deltaTime);
             }
             else
             {
+                goingRight = true;
                 transform.Translate(-Vector2.left * speed * 2 * Time.deltaTime);
             }
         }
+    }
+
+    private bool FindDirection(Transform me, Transform target)
+    {
+        return (me.position.x < target.position.x) ? true : false;
     }
 
     void OutOfBounds()
