@@ -7,7 +7,7 @@ using UnityEditor;
 public class SpawnScript : MonoBehaviour
 {
     private int _tickCounter;
-    private string[] _snopp = new string[2] { "Turtle", "Octopus" };
+    private string[] _snopp = new string[3] { "Turtle", "Octopus", "TinyFish" };
     private System.Random _chancifier = new System.Random();
 
     // Start is called before the first frame update
