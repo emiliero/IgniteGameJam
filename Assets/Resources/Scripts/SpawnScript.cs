@@ -1,26 +1,58 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
+//using System.Random as Random;
 
 public class SpawnScript : MonoBehaviour
 {
-    int fuckery = 0;
+    private int _tickCounter;
+    private string[] _snopp = new string[2] { "Turtle", "Octopus" };
+    private System.Random _chancifier = new System.Random();
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        _tickCounter = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        fuckery = fuckery >= 5 ? 0 : fuckery++;
+        _tickCounter++;
 
-        if (fuckery == 0)
+        Debug.Log(_tickCounter);
+
+        if (_tickCounter % 120 == 0)
         {
-            GameObject cunt = Resources.Load("Prefabs/Octopus") as GameObject;
-            
+            var right = _chancifier.Next(0, 2) == 0;
+            int x;
+
+            if (right)
+            {
+                x = 5;
+            }
+            else
+            {
+                x = -5;
+            }
+
+            if (right && transform.localScale.x > 0 || !right && transform.localScale.x < 0)
+            {
+                transform.localScale *= -1;
+            }
+
+            var snoppChooser = _chancifier.Next(_snopp.Length);
+            var pos = new Vector3(x, GameObject.Find("Main Camera").transform.position.y - 5, 0);
+
+            var chosenSnopp = Resources.Load($"Prefabs/{_snopp[snoppChooser]}", typeof(GameObject)) as GameObject;
+            //chosenSnopp.transform.position.y = GameObject.Find("Main Camera").transform.position.y - 5;
+            //GameObject instantiatedSnopp = Instantiate(chosenSnopp, pos, chosenSnopp.transform.rotation);
+            Instantiate(chosenSnopp, pos, chosenSnopp.transform.rotation);
+
+            //GameObject chosenSnopp = Instantiate(Resources.Load($"Prefabs/{_snopp[snoppChooser]}", typeof(GameObject)), pos) as GameObject;
+
+            Debug.Log(chosenSnopp.ToString());
         }
     }
 }
