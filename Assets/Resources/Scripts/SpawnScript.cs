@@ -26,7 +26,7 @@ public class SpawnScript : MonoBehaviour
         {
             int x = _chancifier.Next(-10, 11);
             var snoppChooser = _chancifier.Next(_snopp.Length);
-            var pos = new Vector3(x, GameObject.Find("Main Camera").transform.position.y - _chancifier.Next(3, 7), 0);
+            var pos = new Vector3(x, GameObject.Find("Main Camera").transform.position.y - _chancifier.Next(7, 14), 0);
             var chosenSnopp = Resources.Load($"Prefabs/{_snopp[snoppChooser]}", typeof(GameObject)) as GameObject;
 
             Instantiate(chosenSnopp, pos, chosenSnopp.transform.rotation);
