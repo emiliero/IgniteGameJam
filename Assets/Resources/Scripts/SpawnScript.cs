@@ -28,7 +28,7 @@ public class SpawnScript : MonoBehaviour
         if (_snoppCountDown >= _spawnNumber)
         {
             _snoppCountDown = 0;
-            _spawnNumber = Random.Range(60, 180);
+            _spawnNumber = Random.Range(60, 120);
 
             var snoppChooser = _snopp[_chancifier.Next(_snopp.Length)];
             var x = snoppChooser == "Octopus" ? Random.Range(-10, 10) : _xOffsets[_chancifier.Next(_xOffsets.Length)];
