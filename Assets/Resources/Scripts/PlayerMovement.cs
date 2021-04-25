@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
+    public CameraController camCon;
     float verticalMove = 0f;
     float horizontalMove = 0f;
     Rigidbody2D player;
@@ -15,6 +16,7 @@ public class playerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        camCon = GameObject.Find("Main Camera").GetComponent<CameraController>();
         player = GetComponent<Rigidbody2D> ();
     }
 
@@ -22,6 +24,7 @@ public class playerMovement : MonoBehaviour
     void Update()
     {
         Move();
+        camCon.playerSpeed = -moveByY;
     }
 
     void FixedUpdate ()
