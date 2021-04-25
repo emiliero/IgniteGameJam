@@ -30,10 +30,10 @@ public class TinyFish : MonoBehaviour
             transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
         }
         OutOfBounds();
-        goingRight = FindDirection(transform, target.transform);
         timer -= Time.deltaTime;
         if (timer > 0)
         {
+            goingRight = FindDirection(transform, target.transform);
             transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
             if (transform.position.x < target.transform.position.x)
             {
@@ -46,12 +46,15 @@ public class TinyFish : MonoBehaviour
         }
         else
         {
+
             if (transform.position.x < 0)
             {
+                goingRight = false;
                 transform.Translate(Vector2.left * speed * 2 * Time.deltaTime);
             }
             else
             {
+                goingRight = true;
                 transform.Translate(-Vector2.left * speed * 2 * Time.deltaTime);
             }
         }
