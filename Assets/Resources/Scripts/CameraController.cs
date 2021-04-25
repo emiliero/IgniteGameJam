@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
     
     void Start()
     {
-        speed = 2f;
+        speed = 2f; 
     }
 
     void FixedUpdate()
