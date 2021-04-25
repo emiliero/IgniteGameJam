@@ -5,8 +5,8 @@ using UnityEditor;
 
 public class SpawnScript : MonoBehaviour
 {
-    private long _tickCounter;
-    private int _snoppCountDown, _spawnNumber;
+    private long _tickCounter;  // Highscore?
+    private int _snoppCountDown, _spawnNumber, _difficulty;
     private string[] _snopp = new string[3] { "Turtle", "Octopus", "TinyFish" };
     private int[] _xOffsets = new int[2] { -10, 10 };
     private System.Random _chancifier = new System.Random();
@@ -25,10 +25,14 @@ public class SpawnScript : MonoBehaviour
         _tickCounter++;
         _snoppCountDown++;
 
+        _difficulty = _difficulty < 59 ? (int) _tickCounter / 300 : 59;
+
+        Debug.Log(_difficulty);
+
         if (_snoppCountDown >= _spawnNumber)
         {
             _snoppCountDown = 0;
-            _spawnNumber = Random.Range(60, 120);
+            _spawnNumber = Random.Range(60 - _difficulty, 180 - (_difficulty * 2));
 
             var snoppChooser = _snopp[_chancifier.Next(_snopp.Length)];
             var x = snoppChooser == "Octopus" ? Random.Range(-10, 10) : _xOffsets[_chancifier.Next(_xOffsets.Length)];
