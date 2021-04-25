@@ -21,8 +21,6 @@ public class SpawnScript : MonoBehaviour
     {
         _tickCounter++;
 
-        Debug.Log(_tickCounter);
-
         if (_tickCounter % 120 == 0)
         {
             var right = _chancifier.Next(0, 2) == 0;
@@ -43,16 +41,10 @@ public class SpawnScript : MonoBehaviour
             }
 
             var snoppChooser = _chancifier.Next(_snopp.Length);
-            var pos = new Vector3(x, GameObject.Find("Main Camera").transform.position.y - 5, 0);
-
+            var pos = new Vector3(x, GameObject.Find("Main Camera").transform.position.y - _chancifier.Next(3, 7), 0);
             var chosenSnopp = Resources.Load($"Prefabs/{_snopp[snoppChooser]}", typeof(GameObject)) as GameObject;
-            //chosenSnopp.transform.position.y = GameObject.Find("Main Camera").transform.position.y - 5;
-            //GameObject instantiatedSnopp = Instantiate(chosenSnopp, pos, chosenSnopp.transform.rotation);
+
             Instantiate(chosenSnopp, pos, chosenSnopp.transform.rotation);
-
-            //GameObject chosenSnopp = Instantiate(Resources.Load($"Prefabs/{_snopp[snoppChooser]}", typeof(GameObject)), pos) as GameObject;
-
-            Debug.Log(chosenSnopp.ToString());
         }
     }
 }
