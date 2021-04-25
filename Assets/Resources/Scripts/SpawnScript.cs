@@ -22,12 +22,34 @@ public class SpawnScript : MonoBehaviour
     {
         _tickCounter++;
 
-        if (_tickCounter % 120 == 0)
+        if (_tickCounter % 100 == 0)
         {
-            int x = _chancifier.Next(-10, 11);
+            var right = _chancifier.Next(0, 2) == 0;
+            int x;
+
+            if (right)
+            {
+                x = 10;
+            }
+            else
+            {
+                x = -10;
+            }
+
+            if (right && transform.localScale.x > 0 || !right && transform.localScale.x < 0)
+            {
+                transform.localScale *= -1;
+            }
+
             var snoppChooser = _chancifier.Next(_snopp.Length);
             var pos = new Vector3(x, GameObject.Find("Main Camera").transform.position.y - _chancifier.Next(7, 14), 0);
             var chosenSnopp = Resources.Load($"Prefabs/{_snopp[snoppChooser]}", typeof(GameObject)) as GameObject;
+
+            if (chosenSnopp.name == "Octopus")
+            {
+                x = Random.Range(-10, 10);
+                pos = new Vector3(x, GameObject.Find("Main Camera").transform.position.y - _chancifier.Next(7, 14), 0);
+            }
 
             Instantiate(chosenSnopp, pos, chosenSnopp.transform.rotation);
         }

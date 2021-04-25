@@ -13,7 +13,7 @@ public class TinyFish : MonoBehaviour
     void Start()
     {
         target = GameObject.Find("Player");
-        speed = 3;
+        speed = UnityEngine.Random.Range(4, 6);
         timer = UnityEngine.Random.Range(7, 12);
         if (transform.position.x < 0) goingRight = true;
     }
@@ -21,14 +21,7 @@ public class TinyFish : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!goingRight && transform.localScale.x < 0)
-        {
-            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-        }
-        else if(goingRight && transform.localScale.x > 0)
-        {
-            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-        }
+        FlipMe();
         OutOfBounds();
         timer -= Time.deltaTime;
         if (timer > 0)
@@ -37,11 +30,11 @@ public class TinyFish : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
             if (transform.position.x < target.transform.position.x)
             {
-                transform.Translate(Vector2.left * speed * .5f * Time.deltaTime);
+                transform.Translate(Vector2.left * speed * .45f * Time.deltaTime);
             }
             else
             {
-                transform.Translate(-Vector2.left * speed * .5f * Time.deltaTime);
+                transform.Translate(-Vector2.left * speed * .45f * Time.deltaTime);
             }
         }
         else
@@ -70,6 +63,18 @@ public class TinyFish : MonoBehaviour
         if (transform.position.x < -10 || transform.position.x > 10)
         {
             Destroy(gameObject);
+        }
+    }
+
+    void FlipMe()
+    {
+        if (!goingRight && transform.localScale.x < 0)
+        {
+            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        }
+        else if (goingRight && transform.localScale.x > 0)
+        {
+            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
         }
     }
 }
