@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-//using System.Random as Random;
 
 public class SpawnScript : MonoBehaviour
 {
-    private int _tickCounter;
+    private long _tickCounter;
+    private int _snoppCountDown, _spawnNumber;
     private string[] _snopp = new string[3] { "Turtle", "Octopus", "TinyFish" };
     private System.Random _chancifier = new System.Random();
 
@@ -14,6 +14,7 @@ public class SpawnScript : MonoBehaviour
     void Start()
     {
         _tickCounter = 0;
+        _snoppCountDown = 0;
     }
 
     // Update is called once per frame
