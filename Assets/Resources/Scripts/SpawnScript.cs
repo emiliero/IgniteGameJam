@@ -42,6 +42,9 @@ public class SpawnScript : MonoBehaviour
             case 900:
                 _snopp.Add("TinyFish");
                 break;
+            case 1200:
+                //_snopp.Add("AnglerFish");
+                break;
         }
 
         if (_snoppCountDown >= _spawnNumber)
