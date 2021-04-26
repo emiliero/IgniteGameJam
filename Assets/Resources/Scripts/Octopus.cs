@@ -19,7 +19,6 @@ public class Octopus : MonoBehaviour
         OutOfBounds();
         if (goingUp)
         {
-            Debug.Log("Going up from " + transform.position.y + " to " + startY);
             if (transform.position.y <= startY + 1.4)
             {
                 transform.Translate(new Vector3(1f * direction, 2f, 0) * speed * Time.deltaTime);
