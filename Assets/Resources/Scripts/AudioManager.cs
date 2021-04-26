@@ -36,6 +36,6 @@ public class AudioManager : MonoBehaviour
 
     public void DeathSound()
     {
-        aS.PlayOneShot(deathSound);
+        aS.PlayOneShot(deathSound, PlayerPrefs.GetFloat("Volume"));
     }
 }

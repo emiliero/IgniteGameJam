@@ -58,6 +58,14 @@ public class PlayerMovement : MonoBehaviour
             speed = 3.5f;
             vSpeed = 1.3f;
         }
+
+        if (collision.gameObject.tag == "Enemy")
+        {
+            if (collision.gameObject.GetComponent<AnglerFish>())
+            {
+                collision.gameObject.GetComponent<AnglerFish>().FuckMeUp(gameObject);
+            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
