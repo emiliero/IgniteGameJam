@@ -41,6 +41,14 @@ public class PlayerMovement : MonoBehaviour
         {
             stopples.GetComponent<ParticleSystem>().Stop();
         }
+        if (Input.GetKeyDown(KeyCode.A) && transform.localScale.x < 0)
+        {
+            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        }
+        if (Input.GetKeyDown(KeyCode.D) && transform.localScale.x > 0)
+        {
+            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -65,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
+            GameObject.Find("Main Camera").GetComponent<PauseMenu>().DeadMenuActivate();
             Destroy(gameObject);
         }
     }

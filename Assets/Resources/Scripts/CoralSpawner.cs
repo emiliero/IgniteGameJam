@@ -22,7 +22,8 @@ public class CoralSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.position.y <= coralStep)
+        
+        if (player!=null && player.position.y <= coralStep)
         {
             coralStep -= 25;
             SpawnCoral();
