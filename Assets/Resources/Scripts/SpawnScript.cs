@@ -5,9 +5,10 @@ using UnityEditor;
 
 public class SpawnScript : MonoBehaviour
 {
-    private long _tickCounter;
-    private int _snoppCountDown, _spawnNumber;
+    private long _tickCounter;  // Highscore?
+    private int _snoppCountDown, _spawnNumber, _difficulty;
     private string[] _snopp = new string[3] { "Turtle", "Octopus", "TinyFish" };
+    private int[] _xOffsets = new int[2] { -10, 10 };
     private System.Random _chancifier = new System.Random();
 
     // Start is called before the first frame update
@@ -15,41 +16,28 @@ public class SpawnScript : MonoBehaviour
     {
         _tickCounter = 0;
         _snoppCountDown = 0;
+        _spawnNumber = Random.Range(60, 180);
     }
 
     // Update is called once per frame
     void Update()
     {
         _tickCounter++;
+        _snoppCountDown++;
 
-        if (_tickCounter % 100 == 0)
+        _difficulty = _difficulty < 59 ? (int) _tickCounter / 300 : 59;
+
+        Debug.Log(_difficulty);
+
+        if (_snoppCountDown >= _spawnNumber)
         {
-            var right = _chancifier.Next(0, 2) == 0;
-            int x;
+            _snoppCountDown = 0;
+            _spawnNumber = Random.Range(60 - _difficulty, 180 - (_difficulty * 2));
 
-            if (right)
-            {
-                x = 10;
-            }
-            else
-            {
-                x = -10;
-            }
-
-            if (right && transform.localScale.x > 0 || !right && transform.localScale.x < 0)
-            {
-                transform.localScale *= -1;
-            }
-
-            var snoppChooser = _chancifier.Next(_snopp.Length);
+            var snoppChooser = _snopp[_chancifier.Next(_snopp.Length)];
+            var x = snoppChooser == "Octopus" ? Random.Range(-10, 10) : _xOffsets[_chancifier.Next(_xOffsets.Length)];
             var pos = new Vector3(x, GameObject.Find("Main Camera").transform.position.y - _chancifier.Next(7, 14), 0);
-            var chosenSnopp = Resources.Load($"Prefabs/{_snopp[snoppChooser]}", typeof(GameObject)) as GameObject;
-
-            if (chosenSnopp.name == "Octopus")
-            {
-                x = Random.Range(-10, 10);
-                pos = new Vector3(x, GameObject.Find("Main Camera").transform.position.y - _chancifier.Next(7, 14), 0);
-            }
+            var chosenSnopp = Resources.Load($"Prefabs/{snoppChooser}", typeof(GameObject)) as GameObject;
 
             Instantiate(chosenSnopp, pos, chosenSnopp.transform.rotation);
         }
