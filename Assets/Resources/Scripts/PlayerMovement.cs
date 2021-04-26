@@ -74,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             GameObject.Find("Main Camera").GetComponent<PauseMenu>().DeadMenuActivate();
+            GameObject.Find("Audio").GetComponent<AudioManager>().DeathSound();
             Destroy(gameObject);
         }
     }
