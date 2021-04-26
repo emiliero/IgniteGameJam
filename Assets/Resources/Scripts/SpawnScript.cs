@@ -7,7 +7,7 @@ public class SpawnScript : MonoBehaviour
 {
     private long _tickCounter;  // Highscore?
     private int _snoppCountDown, _spawnNumber, _difficulty;
-    private string[] _snopp = new string[3] { "Turtle", "Octopus", "TinyFish" };
+    private string[] _snopp = new string[4] { "Turtle", "Octopus", "TinyFish", "SeaHorse" };
     private int[] _xOffsets = new int[2] { -10, 10 };
     private System.Random _chancifier = new System.Random();
 
