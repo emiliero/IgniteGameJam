@@ -8,6 +8,11 @@ public class MainMenu : MonoBehaviour
 
     void Awake()
     {
+        if (PlayerPrefs.GetFloat("Volume") == null)
+        {
+            PlayerPrefs.SetFloat("Volume", 1);
+        }
+
         if (GameObject.Find("VolumeSlider"))
         {
             volumeSlider = GameObject.Find("VolumeSlider").GetComponent<Slider>();
