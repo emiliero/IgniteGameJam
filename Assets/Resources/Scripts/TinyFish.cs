@@ -26,16 +26,20 @@ public class TinyFish : MonoBehaviour
         timer -= Time.deltaTime;
         if (timer > 0)
         {
-            goingRight = FindDirection(transform, target.transform);
-            transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
-            if (transform.position.x < target.transform.position.x)
+            if (target != null)
             {
-                transform.Translate(Vector2.left * speed * .45f * Time.deltaTime);
+                goingRight = FindDirection(transform, target.transform);
+                transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+                if (transform.position.x < target.transform.position.x)
+                {
+                    transform.Translate(Vector2.left * speed * .45f * Time.deltaTime);
+                }
+                else
+                {
+                    transform.Translate(-Vector2.left * speed * .45f * Time.deltaTime);
+                }
             }
-            else
-            {
-                transform.Translate(-Vector2.left * speed * .45f * Time.deltaTime);
-            }
+
         }
         else
         {
@@ -63,6 +67,26 @@ public class TinyFish : MonoBehaviour
         if (transform.position.x < -10 || transform.position.x > 10)
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Coral")
+        {
+            Color tmp = GetComponent<SpriteRenderer>().color;
+            tmp.a = 0.2f;
+            GetComponent<SpriteRenderer>().color = tmp;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Coral")
+        {
+            Color tmp = GetComponent<SpriteRenderer>().color;
+            tmp.a = 1f;
+            GetComponent<SpriteRenderer>().color = tmp;
         }
     }
 

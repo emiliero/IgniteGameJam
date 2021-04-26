@@ -1,30 +1,23 @@
 using UnityEngine;
-using UnityEngine.WSA;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    private GameObject pauseMenu;
+    private GameObject deadMenu;
 
     private void Awake()
     {
-        // TODO
-        // pauseMenu = GameObject.Find("PauseMenu");
+        deadMenu = GameObject.Find("PauseMenu");
+        deadMenu.SetActive(false);
     }
 
-    void Update()
+    public void DeadMenuActivate()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            Time.timeScale = 0;
-
-            // TODO
-            // pauseMenu.activeSelf = true;
-        }
+        deadMenu.SetActive(true);
     }
 
-    public void ResumeGame()
+    public void LoadLevel()
     {
-        Time.timeScale = 1;
-        // pauseMenu.activeSelf = false;
+        SceneManager.LoadScene(1);
     }
 }
