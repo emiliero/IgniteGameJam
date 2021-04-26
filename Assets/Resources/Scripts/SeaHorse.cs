@@ -1,44 +1,38 @@
-using UnityEditor;
 using UnityEngine;
 
-public class Octopus : MonoBehaviour
+public class SeaHorse : MonoBehaviour
 {
-    float startY, speed;
-    bool goingUp = true;
-    int direction;
+    float timer, speedTimer, speed;
+    Vector2 direction;
 
     void Start()
     {
-        speed = 5f;
-        startY = transform.position.y;
-        direction = transform.position.x < 0 ? 1 : -1;
+        float size = Random.Range(50, 100);
+        transform.localScale = new Vector2(size/100, size/100);
+        timer = 0.5f;
+        speed = Random.Range(2, 4);
+        direction = new Vector2(Random.Range(-20, 20) / 10, Random.Range(-20, 20) / 10);
     }
 
-    void FixedUpdate()
+    // Update is called once per frame
+    void Update()
     {
         OutOfBounds();
-        if (goingUp)
+        if (timer < 0)
         {
-            if (transform.position.y <= startY + 1.4)
-            {
-                transform.Translate(new Vector3(1f * direction, 2f, 0) * speed * Time.deltaTime);
-            }
-            else
-            {
-                goingUp = false;
-            }
+            timer = 3;
+            direction = new Vector2(Random.Range(-20, 20) / 10, Random.Range(-20, 20) / 10);
         }
-        else
+        if (speedTimer < 0)
         {
-            if (transform.position.y >= startY - 1.4f)
-            {
-                transform.Translate(new Vector3(0.1f * direction, -.5f, 0) * speed * Time.deltaTime);
-            }
-            else
-            {
-                goingUp = true;
-            }
+            speed = Random.Range(2, 3);
+            speedTimer = Random.Range(10, 50)/10;
         }
+
+        timer -= Time.deltaTime;
+        speedTimer -= Time.deltaTime;
+
+        transform.Translate(direction * speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
