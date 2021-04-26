@@ -8,11 +8,14 @@ public class MainMenu : MonoBehaviour
 
     void Awake()
     {
-        volumeSlider = GameObject.Find("VolumeSlider").GetComponent<Slider>();
-        volumeSlider.value = LoadVolume();
+        if (GameObject.Find("VolumeSlider"))
+        {
+            volumeSlider = GameObject.Find("VolumeSlider").GetComponent<Slider>();
+            volumeSlider.value = LoadVolume();
 
             // Kun et eksempel på hvordan man debugger verdier i consollen.
-        Debug.Log("Demo Debug. Volumet er satt til " + volumeSlider.value);           
+            Debug.Log("Demo Debug. Volumet er satt til " + volumeSlider.value);
+        }
     }
 
     public void SaveVolume()
@@ -30,8 +33,8 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    public void LoadLevel(int lvl)
+    public void LoadLevel()
     {
-        SceneManager.LoadScene("Level" + lvl.ToString());
+        SceneManager.LoadScene(1);
     }
 }

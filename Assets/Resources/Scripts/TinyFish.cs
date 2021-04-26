@@ -26,16 +26,20 @@ public class TinyFish : MonoBehaviour
         timer -= Time.deltaTime;
         if (timer > 0)
         {
-            goingRight = FindDirection(transform, target.transform);
-            transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
-            if (transform.position.x < target.transform.position.x)
+            if (target != null)
             {
-                transform.Translate(Vector2.left * speed * .45f * Time.deltaTime);
+                goingRight = FindDirection(transform, target.transform);
+                transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+                if (transform.position.x < target.transform.position.x)
+                {
+                    transform.Translate(Vector2.left * speed * .45f * Time.deltaTime);
+                }
+                else
+                {
+                    transform.Translate(-Vector2.left * speed * .45f * Time.deltaTime);
+                }
             }
-            else
-            {
-                transform.Translate(-Vector2.left * speed * .45f * Time.deltaTime);
-            }
+
         }
         else
         {
