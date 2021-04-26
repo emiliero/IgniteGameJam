@@ -39,6 +39,26 @@ public class Turtle : MonoBehaviour
         return (me.position.x < target.position.x) ? true : false;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Coral")
+        {
+            Color tmp = GetComponent<SpriteRenderer>().color;
+            tmp.a = 0.2f;
+            GetComponent<SpriteRenderer>().color = tmp;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Coral")
+        {
+            Color tmp = GetComponent<SpriteRenderer>().color;
+            tmp.a = 1f;
+            GetComponent<SpriteRenderer>().color = tmp;
+        }
+    }
+
     void FlipMe()
     {
         if (!goingRight && transform.localScale.x < 0)

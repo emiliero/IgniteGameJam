@@ -8,7 +8,6 @@ public class SeaHorse : MonoBehaviour
     void Start()
     {
         float size = Random.Range(50, 100);
-        Debug.Log(size);
         transform.localScale = new Vector2(size/100, size/100);
         timer = 0.5f;
         speed = Random.Range(2, 4);
@@ -34,6 +33,26 @@ public class SeaHorse : MonoBehaviour
         speedTimer -= Time.deltaTime;
 
         transform.Translate(direction * speed * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Coral")
+        {
+            Color tmp = GetComponent<SpriteRenderer>().color;
+            tmp.a = 0.2f;
+            GetComponent<SpriteRenderer>().color = tmp;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Coral")
+        {
+            Color tmp = GetComponent<SpriteRenderer>().color;
+            tmp.a = 1f;
+            GetComponent<SpriteRenderer>().color = tmp;
+        }
     }
 
     void OutOfBounds()

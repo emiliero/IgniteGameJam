@@ -27,7 +27,7 @@ public class SpawnScript : MonoBehaviour
 
         _difficulty = _difficulty < 59 ? (int) _tickCounter / 300 : 59;
 
-        Debug.Log(_difficulty);
+        //Debug.Log(_difficulty);
 
         if (_snoppCountDown >= _spawnNumber)
         {
