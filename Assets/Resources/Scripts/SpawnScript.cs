@@ -43,7 +43,7 @@ public class SpawnScript : MonoBehaviour
                 _snopp.Add("TinyFish");
                 break;
             case 1200:
-                //_snopp.Add("AnglerFish");
+                _snopp.Add("AnglerFish");
                 break;
         }
 
