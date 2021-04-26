@@ -29,10 +29,11 @@ public class AnglerFish : MonoBehaviour
         OutOfBounds();
         transform.Translate(new Vector2(speed * direction * Time.deltaTime, upDown));
 
-        if (kill)
+        if (kill && target)
         {
+            goingRight = target.transform.position.x < transform.position.x ? false : true;
             FindDirection(transform, target.transform);
-            transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * 10 * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * 5 * Time.deltaTime);
         }
     }
 
@@ -85,6 +86,7 @@ public class AnglerFish : MonoBehaviour
     {
         kill = true;
         target = gameO;
+        GetComponent<Animator>().SetBool("targetSpooted", true);
         Debug.Log("GO!");
     }
 }
