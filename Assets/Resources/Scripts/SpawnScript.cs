@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class SpawnScript : MonoBehaviour
 {
@@ -20,8 +18,6 @@ public class SpawnScript : MonoBehaviour
         _spawnNumber = Random.Range(60, 180);
 
         _snopp.Add("Turtle");
-
-        //"Turtle", "Octopus", "TinyFish", "SeaHorse"
     }
 
     // Update is called once per frame
@@ -33,16 +29,16 @@ public class SpawnScript : MonoBehaviour
 
         switch (_tickCounter)
         {
-            case 300:
+            case 600:
                 _snopp.Add("SeaHorse");
                 break;
-            case 600:
+            case 1200:
                 _snopp.Add("Octopus");
                 break;
-            case 900:
+            case 1800:
                 _snopp.Add("TinyFish");
                 break;
-            case 1200:
+            case 2400:
                 _snopp.Add("AnglerFish");
                 break;
         }
